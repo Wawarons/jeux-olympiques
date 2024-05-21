@@ -14,7 +14,7 @@ const HideShowPassword = ({title, showPassword}: Props) => {
     } 
 
   return (
-    <div className="flex items-center space-x-2 my-2">
+    <div className="flex items-center space-x-2">
       <label htmlFor="password">{title ? title:"Password"}</label>
       {isShow ? (
         <IoEyeOff

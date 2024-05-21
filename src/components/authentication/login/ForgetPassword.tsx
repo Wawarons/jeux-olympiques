@@ -1,16 +1,16 @@
 import { FormEvent, useState } from "react";
 import Timer from "../../Timer";
 import axios from "axios";
+import Message, { MessageType } from "../Message";
 
 const ForgetPassword = () => {
-    const [message, setMessage] = useState("");
+    const [messages, setMessages] = useState<MessageType | null>();
     const [newResetLinkDisable, setNewResetLinkDisable] = useState(false);
 
     const DISABLE_TIME: number = 300000;
 
   const handleSendResetLink = async (event: FormEvent) => {
     event.preventDefault();
-    console.log("TEST")!
     const { email } = event.target as typeof event.target & {
       email: {value: string}
     }
@@ -22,19 +22,22 @@ const ForgetPassword = () => {
         });
 
     } catch (error) {
-        if(axios.isAxiosError(error)) {
-            console.log(error.response);
-        }
+      if (axios.isAxiosError(error) && error.response?.data?.details) {
+        setMessages({message: error.response.data.details, type: "negative"});
+      } else {
+        console.error("An unexpected error occurred:", error);
+      }
     }
 
     if(response && response.status === 200) {
-        setMessage("A reset link has been send to " + email.value);
+        setMessages({message:`A reset link has been send to ${email.value}`, type: "positive"});
+        setMessages(null);
     }
   };
 
   return (
     <div className="">
-      <p className="positive">{message}</p>
+      <Message messages={messages?.message} type={messages?.type} />
       <form
         method="POST"
         onSubmit={handleSendResetLink}

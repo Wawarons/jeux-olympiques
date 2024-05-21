@@ -5,6 +5,7 @@ import Home from "../Home";
 import Page404 from "../Page404";
 import ProtectedRoutes from "./ProtectedRoutes";
 import NoAuthRoutes from "./NoAuthRoutes";
+import NewPasswordForm from "../components/authentication/NewPasswordForm";
 
 /**
  * Function that defines the routing configuration for the application.
@@ -49,6 +50,10 @@ const Routes = () => {
         {
           path: "/forget_password",
           element: <Authentication type="forget_password" title="Reset password"/>,
+        },
+        {
+          path: "/register/reset-password",
+          element: <NewPasswordForm/>
         },
       ],
     },

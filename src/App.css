@@ -31,6 +31,12 @@ form .auth_input {
   box-shadow: inset 1px 1px 1px 1px #0000004b;
 }
 
+form .invalid_input:focus {
+  border: 2px solid red;
+  color: red;
+  outline: none;
+}
+
 form label {
   font-weight: bold;
 }

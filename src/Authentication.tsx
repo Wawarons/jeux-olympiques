@@ -3,6 +3,7 @@ import { useState } from "react";
 import { IoArrowBack } from "react-icons/io5";
 import Signup from "./components/authentication/signup/Signup";
 import ForgetPassword from "./components/authentication/login/ForgetPassword";
+import NavBar from "./components/NavBar";
 
 type Props = {
   type: "login" | "signup" | "forget_password";
@@ -30,6 +31,7 @@ const Authentication = ({ type, title }: Props) => {
 
   return (
     <>
+    <NavBar/>
       <div className="flex flex-col lg:flex-row">
         <div className="bg-ceremonie-ouvertue bg-no-repeat bg-cover w-screen h-[250px] lg:w-1/3 lg:h-screen"></div>
         <div className="relative top-1/2 w-full">

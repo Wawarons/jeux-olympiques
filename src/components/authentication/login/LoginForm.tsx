@@ -1,10 +1,11 @@
 import { FormEvent, useState } from "react";
 import { useAuth } from "../../../providers/AuthProvider";
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowRight, FaCheckCircle } from "react-icons/fa";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import HideShowPassword from "../../HideShowPassword";
 import Message from "../Message";
+import { isValidEmail, isValidPassword } from "../../ValidData";
 
 type FormData = {
   email: string;
@@ -27,12 +28,13 @@ type Message = {
  *
  * @returns {JSX.Element} A form component with email and password fields for user login.
  */
-const LoginForm = ({ loginSuccessfull }: Props) => {
+const LoginForm = ({ loginSuccessfull }: Props): JSX.Element => {
   const [message, setMessage] = useState<Message>();
   const { preAuth, setToken } = useAuth();
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [validEmail, setValidEmail] = useState<boolean | null>(null);
+  const [validPassword, setValidPassword] = useState<boolean | null>(null);
 
-  // Handle the state of isLogin of the parent's component
   const handleStateIsLogin = (stateIsLogin: boolean) => {
     loginSuccessfull(stateIsLogin);
   };
@@ -47,7 +49,7 @@ const LoginForm = ({ loginSuccessfull }: Props) => {
    * @param {FormEvent} event - The form submission event.
    * @returns {void}
    */
-  const handleSubmit = async (event: FormEvent) => {
+  const handleSubmit = async (event: FormEvent): Promise<void> => {
     event.preventDefault();
     const { email, password } = event.target as typeof event.target & {
       email: { value: string };
@@ -70,15 +72,12 @@ const LoginForm = ({ loginSuccessfull }: Props) => {
       if (response.status === 200 && response.data) {
         const { token } = response.data;
 
-        //Decode the jwt
         const decodedToken = jwtDecode(token);
 
-        //Pre auth the user for handle necessary informations related to the code confirmation
         const user = { id: decodedToken.sub, email: formData.email };
         preAuth(user);
         setToken(token);
 
-        //Change the state of isLogin for switch to the code form.
         handleStateIsLogin(true);
       }
     } catch (error) {
@@ -99,29 +98,37 @@ const LoginForm = ({ loginSuccessfull }: Props) => {
       <form
         method="POST"
         onSubmit={handleSubmit}
-        className="p-2 my-3 space-y-6 rounded-md form-shadow"
+        className="p-2 my-3 space-y-5 rounded-md form-shadow"
       >
-        <div>
-          <label htmlFor="email" className="p-2">
-            Email
-          </label>
+        <div className="space-y-2">
+          <div className="flex items-center space-x-2">
+            <label htmlFor="email">Email</label>
+            {validEmail && <FaCheckCircle color="green" />}
+          </div>
           <input
-            className="auth_input w-full"
-            placeholder="Email"
+            placeholder="Email@domaine.xyz"
+            className={`auth_input ${!validEmail ? "invalid_input" : ""}`}
             type="text"
             name="email"
-            maxLength={250}
+            onChange={({ target }) => {
+              setValidEmail(isValidEmail(target.value));
+            }}
             required
           />
         </div>
-        <div>
-          <HideShowPassword showPassword={handleVisiblePassword} />
+        <div className="space-y-2">
+          <div className="flex items-center space-x-2">
+            <HideShowPassword showPassword={handleVisiblePassword} />
+            {validPassword && <FaCheckCircle color="green" />}
+          </div>
           <input
-            className="auth_input w-full"
             placeholder="•••••••••"
+            className={`auth_input ${!validPassword ? "invalid_input" : ""}`}
             type={showPassword ? "text" : "password"}
             name="password"
-            maxLength={250}
+            onChange={({ target }) => {
+              setValidPassword(isValidPassword(target.value));
+            }}
             required
           />
           <a
@@ -130,10 +137,9 @@ const LoginForm = ({ loginSuccessfull }: Props) => {
           >
             Forget password
           </a>
-          <br />
         </div>
         <div className="w-fit mx-auto">
-          <button type="submit">
+          <button type="submit" disabled={!(validEmail && validPassword)}>
             <FaArrowRight
               size={35}
               className="rounded-[50%] p-2 text-2xl button-shadow cursor-pointer transition duration-200 hover:drop-shadow-lg hover:bg-bg-color hover:text-or-color"
