@@ -73,7 +73,7 @@ const NewPasswordForm = () => {
           }, 2000);
         } else {
           setMessages({ message: "An error occured, please try again.", type: "negative" });
-          console.log("Error: " + error);
+          console.error("Error: " + error);
         }
       }
     }

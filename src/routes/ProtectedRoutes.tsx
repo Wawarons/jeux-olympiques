@@ -9,7 +9,6 @@ import { useAuth } from "../providers/AuthProvider";
  */
 const ProtectedRoutes = () => {
   const { user } = useAuth();
-  console.log(user);
   if (!user.isAuth) return <Navigate to="/register" />;
 
   return <Outlet />;

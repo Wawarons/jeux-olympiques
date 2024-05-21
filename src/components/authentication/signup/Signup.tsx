@@ -105,7 +105,7 @@ const Signup = () => {
           message: "An error occured, please try again.",
           type: "negative",
         });
-        console.log("Error: " + error);
+        console.error("Error: " + error);
       }
     }
   };
