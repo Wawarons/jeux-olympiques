@@ -24,13 +24,13 @@ const NewPasswordForm = () => {
 
   const handleResetPassword = async (event: FormEvent) => {
     event.preventDefault();
-    let { password, confirm_password } =
+    const { password, confirm_password } =
       event.target as typeof event.target & {
         password: { value: string };
         confirm_password: { value: string };
       };
 
-    let formData: { confirmPassword: string; password: string } = {
+    const formData: { confirmPassword: string; password: string } = {
       confirmPassword: confirm_password.value,
       password: password.value,
     };
