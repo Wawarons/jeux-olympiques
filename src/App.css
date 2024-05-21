@@ -71,29 +71,48 @@ button:disabled {
   background-color: #fef2f2;
   color: #ef4444;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+
+.article {
+  transition: 0.5s;
+  box-shadow: 2px 2px 5px 2px #c8c8c8;
+  cursor: pointer;
 }
 
-@keyframes logo-spin {
+.article:hover {
+  box-shadow: none;
+}
+
+/* Side menu */
+.slide-show-menu {
+  transition: 0.5s;
+  animation: slide-show-menu 0.3s ease-out;
+  animation-fill-mode: forwards;
+}
+
+.slide-hidden-menu {
+  transition: 0.5s;
+  animation: slide-hide-menu 0.3s ease-out;
+  animation-fill-mode: forwards;
+}
+
+.side-menu-link {
+  box-shadow: rgba(0, 0, 0, 0.137) 0px 1px 2px;
+}
+
+@keyframes slide-show-menu {
   from {
-    transform: rotate(0deg);
+    transform: translateX(100%);
   }
   to {
-    transform: rotate(360deg);
+    transform: none;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@keyframes slide-hide-menu {
+  from {
+    transform: none;
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  to {
+    transform: translateX(100%);
+  }
 }
