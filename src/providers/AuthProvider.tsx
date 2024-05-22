@@ -165,8 +165,7 @@ const AuthProvider = ({ children }: Props) => {
   useEffect(() => {
     let token = localStorage.getItem("token");
     if (token) token = JSON.parse(token).value;
-
-    if (token && isAccessTokenPresent()) {
+    if (token) {
       checkTokenValidity(token).then((isValid) => {
         if (isValid) {
           const decodedToken: { sub: string; roles: string[] } =

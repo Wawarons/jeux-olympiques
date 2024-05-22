@@ -113,14 +113,13 @@ const Signup = () => {
   return (
     <>
       <Message messages={messages?.message} type={messages?.type} />
-      <form method="POST" onSubmit={handleSubmit} className="p-2 space-y-6">
-        <div className="flex flex-col lg:flex-row justify-between max-md:space-y-6 space-x-5">
+      <form method="POST" onSubmit={handleSubmit} className="p-2 space-y-6 form-shadow rounded-lg max-w-[500px]">
+        <div className="flex flex-col lg:flex-row justify-between max-lg:space-y-6 lg:space-x-5">
           <div className="w-full">
             <div className="flex items-center space-x-2">
               <label htmlFor="name">Name</label>
               {validName && <FaCheckCircle color="green" />}
             </div>
-            <br />
             <input
               placeholder="Name"
               className={`auth_input ${!validName ? "invalid_input" : ""}`}
@@ -137,7 +136,6 @@ const Signup = () => {
               <label htmlFor="firstname">Firstname</label>
               {validFirstname && <FaCheckCircle color="green" />}
             </div>
-            <br />
             <input
               placeholder="Firstname"
               className={`auth_input ${!validFirstname ? "invalid_input" : ""}`}
@@ -155,7 +153,6 @@ const Signup = () => {
             <label htmlFor="email">Email</label>
             {validEmail && <FaCheckCircle color="green" />}
           </div>
-          <br />
           <input
             placeholder="Email@domaine.xyz"
             className={`auth_input ${!validEmail ? "invalid_input" : ""}`}

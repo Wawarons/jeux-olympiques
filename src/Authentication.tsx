@@ -38,22 +38,22 @@ const Authentication = ({ type, title }: Props) => {
           <a href="/">
             <IoArrowBack size={30} className="m-5" />
           </a>
-          <div className="w-11/12 md:w-1/3 lg:w-1/4 max-md:mx-auto md:translate-x-1/2">
+          <div className="min-w-fit w-fit md:w-1/2 max-md:mx-auto md:translate-x-1/2">
             <h1 className="text-5xl mx-2.5 my-11 font-bold first-letter:uppercase">
               {title ? title:form}
             </h1>
+          <p
+            className="w-fit h-fit underline text-end text-sm m-2 cursor-pointer"
+            onClick={() => switchForm()}
+          >
+            {form == "signup" ? "Already have an account ?" : "no account ?"}
+          </p>
             {form == "login" && <Login />}
             {form == "signup" && <Signup/>}
             {form == "forget_password" && <ForgetPassword/>}
           </div>
         </div>
       </div>
-      <p
-        className="relative bottom-0 right-0 underline text-sm m-2 cursor-pointer"
-        onClick={() => switchForm()}
-      >
-        {form == "signup" ? "Already have an account ?" : "no account ?"}
-      </p>
     </>
   );
 };
