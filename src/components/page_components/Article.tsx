@@ -13,6 +13,7 @@ const Article = () => {
           <img
             src="https://i.ibb.co/W5Ww9nD/ceremonie-paris-2024.jpg"
             alt="image"
+            aria-label="img-article"
             className=""
           />
         </div>

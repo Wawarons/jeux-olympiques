@@ -1,8 +1,9 @@
 import { FormEvent, useState } from "react";
 import { useAuth } from "../../../providers/AuthProvider";
-import Timer from "../../Timer";
+import Timer from "../../utils/Timer";
 import axios from "axios";
 import Message, { MessageType } from "../Message";
+import { isValidCode } from "../../../utils/ValidData";
 
 /**
  * Function component representing a form for entering and validating a code for authentication.
@@ -25,23 +26,17 @@ const Code = () => {
     }, DISABLE_TIME);
   };
 
-  const validData = (formData: FormData) => {
-    const code: string | null = (formData.get("code") as string);
-
-    if (!code.match("[0-9]{6}")) {
-      setMessages({message:["Code must only contains digits."], type: "negative"});
-      return false;
-    }
-
-    return true;
-  };
-
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
     const formData = new FormData(form);
-
-    if (!validData(formData)) return;
+    const code: string = (formData.get("code") as string);
+    if(code != null) {
+      if (!isValidCode(code)) {
+        setMessages({message:["Code must only contains digits."], type: "negative"});
+        return;
+      }
+    }
     const body = {
       code: formData.get("code"),
       userId: user.id,

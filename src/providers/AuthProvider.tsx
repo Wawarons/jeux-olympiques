@@ -10,6 +10,7 @@ import {
   ReactNode,
   Reducer,
 } from "react";
+import { checkTokenValidity, isAccessTokenPresent } from "../utils/apiService";
 
 /**
  * Represents the interface definition for a User object, including authentication status, id, email, and roles.
@@ -99,22 +100,6 @@ const AuthProvider = ({ children }: Props) => {
   const [token, _setToken] = useState<string | null>(null);
 
   /**
-   * Checks if the access token is present in the document's cookies.
-   *
-   * @returns {boolean} Returns true if the access token is present, otherwise false.
-   */
-  const isAccessTokenPresent = useCallback((): boolean => {
-    const cookies = document.cookie.split(";");
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim();
-      if (cookie.indexOf("access_token=") === 0) {
-        return true;
-      }
-    }
-    return false;
-  }, []);
-
-  /**
    * Fetches a new token by making a GET request to the API endpoint for claiming a user token.
    * If the request is successful and the response status is 200, it stores the token in local storage,
    * decodes the token to extract user information, and updates the user state with the decoded information.
@@ -144,29 +129,10 @@ const AuthProvider = ({ children }: Props) => {
       });
   }, []);
 
-  /**
-   * Asynchronous function that checks the validity of a token by making a GET request to the API endpoint for token validation.
-   * It returns a Promise that resolves to a boolean indicating whether the token is valid (status code 200) or not.
-   *
-   * @param {string} token - The token to be validated.
-   * @returns {Promise<boolean>} A Promise that resolves to true if the token is valid, false otherwise.
-   */
-  const checkTokenValidity = useCallback(
-    async (token: string): Promise<boolean> => {
-      const valid = await axios.get(
-        `${import.meta.env.VITE_API_URL}/token/user/validate?token=${token}`,
-        { withCredentials: true }
-      );
-      return valid.status === 200;
-    },
-    []
-  );
-
   useEffect(() => {
     let token = localStorage.getItem("token");
     if (token) token = JSON.parse(token).value;
-
-    if (token && isAccessTokenPresent()) {
+    if (token) {
       checkTokenValidity(token).then((isValid) => {
         if (isValid) {
           const decodedToken: { sub: string; roles: string[] } =
@@ -186,7 +152,7 @@ const AuthProvider = ({ children }: Props) => {
       localStorage.removeItem("token");
       if (isAccessTokenPresent()) claimNewToken();
     }
-  }, [isAccessTokenPresent, claimNewToken, checkTokenValidity]);
+  }, [claimNewToken]);
 
   /**
    * Pre-authenticates a user by dispatching an action to update the user state with the provided user data.

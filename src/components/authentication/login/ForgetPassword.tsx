@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import Timer from "../../Timer";
+import Timer from "../../utils/Timer";
 import axios from "axios";
 import Message, { MessageType } from "../Message";
 

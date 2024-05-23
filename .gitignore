@@ -24,3 +24,6 @@ docs
 *.njsproj
 *.sln
 *.sw?
+
+#Test
+coverage

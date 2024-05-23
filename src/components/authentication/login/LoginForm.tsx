@@ -3,9 +3,9 @@ import { useAuth } from "../../../providers/AuthProvider";
 import { FaArrowRight, FaCheckCircle } from "react-icons/fa";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-import HideShowPassword from "../../HideShowPassword";
+import HideShowPassword from "../../utils/HideShowPassword";
 import Message from "../Message";
-import { isValidEmail, isValidPassword } from "../../ValidData";
+import { isValidEmail, isValidPassword } from "../../../utils/ValidData";
 
 type FormData = {
   email: string;
@@ -98,7 +98,8 @@ const LoginForm = ({ loginSuccessfull }: Props): JSX.Element => {
       <form
         method="POST"
         onSubmit={handleSubmit}
-        className="p-2 my-3 space-y-5 rounded-md form-shadow"
+        className="p-2 my-3 space-y-5 rounded-md form-shadow
+        max-w-[500px]"
       >
         <div className="space-y-2">
           <div className="flex items-center space-x-2">
@@ -116,7 +117,7 @@ const LoginForm = ({ loginSuccessfull }: Props): JSX.Element => {
             required
           />
         </div>
-        <div className="space-y-2">
+        <div className="flex flex-col space-y-2 w-fit">
           <div className="flex items-center space-x-2">
             <HideShowPassword showPassword={handleVisiblePassword} />
             {validPassword && <FaCheckCircle color="green" />}
@@ -133,7 +134,7 @@ const LoginForm = ({ loginSuccessfull }: Props): JSX.Element => {
           />
           <a
             href="/forget_password"
-            className="text-xs text-blue-600 opacity-80"
+            className="w-fit text-xs text-blue-600 opacity-80"
           >
             Forget password
           </a>
