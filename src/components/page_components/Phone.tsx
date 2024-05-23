@@ -12,7 +12,7 @@ const Phone = () => {
     <div className="shadow-xl bg-white rounded-xl md:w-1/3 w-[95%] h-fit border-2 border-gray-300">
       <div className="text-center w-full p-3 shadow-md">
         <h3 className="text-2xl font-bold">Les Phryges</h3>
-        <IoMdContact size={30} className="mx-auto" />
+        <IoMdContact size={30} className="mx-auto" aria-label="contact-icon"/>
       </div>
       <div className="text-white p-4 space-y-10 flex flex-col mx-auto text-xs md:text-lg overflow-scroll h-3/4">
         <div className="p-2 pb-0 bg-blue-400 rounded-md drop-shadow-lg right-0 self-end">
@@ -64,15 +64,16 @@ const Phone = () => {
         </div>
       </div>
       <div className="h-fit flex items-center text-gray-600 space-x-5 border-t-2 p-3">
-        <CiImageOn size={35} />
-        <CiCamera size={35} />
+        <CiImageOn size={35} aria-label="image-icon"/>
+        <CiCamera size={35} aria-label="camera-icon"/>
         <input
           type="text"
           name="message"
           id=""
           className="m-2 p-1.5 bg-gray-200 w-3/4 rounded-xl"
+          aria-label="message"
         />
-        <CiLocationArrow1 size={35} />
+        <CiLocationArrow1 size={35} aria-label="location-icon"/>
       </div>
     </div>
   );

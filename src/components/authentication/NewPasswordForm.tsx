@@ -2,7 +2,7 @@ import { FormEvent, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Message, { MessageType } from "./Message";
-import HideShowPassword from "../HideShowPassword";
+import HideShowPassword from "../utils/HideShowPassword";
 import NavBar from "../NavBar";
 
 const NewPasswordForm = () => {

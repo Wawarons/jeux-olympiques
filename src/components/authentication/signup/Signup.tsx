@@ -1,7 +1,7 @@
 import axios from "axios";
 import { FormEvent, useState } from "react";
 import { FaArrowRight, FaCheckCircle } from "react-icons/fa";
-import HideShowPassword from "../../HideShowPassword";
+import HideShowPassword from "../../utils/HideShowPassword";
 import Message, { MessageType } from "../Message";
 import { isValidEmail, isValidName, isValidPassword } from "../../../utils/ValidData";
 
@@ -51,7 +51,7 @@ const Signup = () => {
    */
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const { name, firstname, email, password, confirm_password } =
+    const { firstname, name, email, password, confirm_password } =
       event.target as typeof event.target & {
         name: { value: string };
         firstname: { value: string };
@@ -85,8 +85,10 @@ const Signup = () => {
           },
         }
       );
-
-      if (response.data && response.data.status === 201) {
+      
+      
+      if (response.data && response.status === 201) {
+        console.log(response);
         setMessages({
           message: `Welcome, ${formData.firstname}! Your account has been successfully created.`,
           type: "positive",
@@ -112,8 +114,8 @@ const Signup = () => {
 
   return (
     <>
-      <Message messages={messages?.message} type={messages?.type} />
       <form method="POST" onSubmit={handleSubmit} className="p-2 space-y-6 form-shadow rounded-lg max-w-[500px]">
+      <Message messages={messages?.message} type={messages?.type} />
         <div className="flex flex-col lg:flex-row justify-between max-lg:space-y-6 lg:space-x-5">
           <div className="w-full">
             <div className="flex items-center space-x-2">
@@ -128,6 +130,7 @@ const Signup = () => {
               onChange={({ target }) => {
                 setValidName(isValidName(target.value));
               }}
+              aria-label="name"
               required
             />
           </div>
@@ -141,6 +144,7 @@ const Signup = () => {
               className={`auth_input ${!validFirstname ? "invalid_input" : ""}`}
               type="text"
               name="firstname"
+              aria-label="firstname"
               onChange={({ target }) => {
                 setValidFirstname(isValidName(target.value));
               }}
@@ -158,6 +162,7 @@ const Signup = () => {
             className={`auth_input ${!validEmail ? "invalid_input" : ""}`}
             type="text"
             name="email"
+            aria-label="email"
             onChange={({ target }) => {
               setValidEmail(isValidEmail(target.value));
             }}
@@ -174,6 +179,7 @@ const Signup = () => {
             className={`auth_input ${!validPassword ? "invalid_input" : ""}`}
             type={showPassword ? "text" : "password"}
             name="password"
+            aria-label="password"
             onChange={({ target }) => {
               setValidPassword(isValidPassword(target.value));
             }}
@@ -194,6 +200,7 @@ const Signup = () => {
             className={`auth_input ${!validPassword ? "invalid_input" : ""}`}
             type={showConfirmPassword ? "text" : "password"}
             name="confirm_password"
+            aria-label="confirm_password"
             onChange={({ target }) => {
               setValidConfirmPassword(isValidPassword(target.value));
             }}

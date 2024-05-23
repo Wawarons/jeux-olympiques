@@ -3,7 +3,7 @@ import { useAuth } from "../../../providers/AuthProvider";
 import { FaArrowRight, FaCheckCircle } from "react-icons/fa";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-import HideShowPassword from "../../HideShowPassword";
+import HideShowPassword from "../../utils/HideShowPassword";
 import Message from "../Message";
 import { isValidEmail, isValidPassword } from "../../../utils/ValidData";
 
