@@ -5,7 +5,7 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import HideShowPassword from "../../HideShowPassword";
 import Message from "../Message";
-import { isValidEmail, isValidPassword } from "../../ValidData";
+import { isValidEmail, isValidPassword } from "../../../utils/ValidData";
 
 type FormData = {
   email: string;

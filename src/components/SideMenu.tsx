@@ -1,11 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../providers/AuthProvider";
 import { IoCloseSharp, IoMenu } from "react-icons/io5";
-
-type linkSideMenu = {
-  title: string;
-  link: string;
-};
+import LinksList, { linksListType } from "./utils/LinksList";
 
 /**
  * Renders a side menu component with customizable icon color.
@@ -19,18 +15,18 @@ const SideMenu = ({ iconColor }: { iconColor?: string }) => {
   const [visible, setVisible] = useState(false);
   const [confirmLogout, setConfirmLogout] = useState(false);
   const [hidden, setHidden] = useState("hidden");
-  const links: linkSideMenu[] = [
+  const links: linksListType[] = [
     {
       title: "Buy tickets",
-      link: "#",
+      href: "#"
     },
     {
       title: "Events",
-      link: "#",
+      href: "#",
     },
     {
       title: "Cart",
-      link: "#",
+      href: "#",
     },
   ];
 
@@ -67,22 +63,7 @@ const SideMenu = ({ iconColor }: { iconColor?: string }) => {
             size={35}
           />
         </div>
-        {links.map((link, index) => {
-          return (
-            <div
-              key={`${link.title}_${index}`}
-              className="w-full side-menu-link p-3 text-center"
-            >
-              <a
-                href={link.link}
-                className="w-fit mx-auto hover:text-blue-400 text-xl text-center"
-              >
-                {link.title}
-              </a>
-            </div>
-          );
-        })}
-
+        <LinksList linksList={links} classLink="p-4 w-fit mx-auto hover:text-blue-400 text-xl text-center"/>
         <div className="flex absolute bottom-5 justify-between w-5/6 left-1/2 transform -translate-x-1/2">
           {user.isAuth ? (
             <a

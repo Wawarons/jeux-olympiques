@@ -3,7 +3,7 @@ import { FormEvent, useState } from "react";
 import { FaArrowRight, FaCheckCircle } from "react-icons/fa";
 import HideShowPassword from "../../HideShowPassword";
 import Message, { MessageType } from "../Message";
-import { isValidEmail, isValidName, isValidPassword } from "../../ValidData";
+import { isValidEmail, isValidName, isValidPassword } from "../../../utils/ValidData";
 
 interface FormData {
   name: string;
