@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const checkTokenValidity = (token: string): Promise<boolean> => {
   return axios
     .get(`${import.meta.env.VITE_API_URL}/token/user/validate?token=${token}`, {
