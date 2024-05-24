@@ -63,7 +63,6 @@ const NewPasswordForm = () => {
         }, 3000);
       }
     } catch (error) {
-
       if (axios.isAxiosError(error)) {
         if (error.response?.status === 401) {
           console.error("Access denied:" + error);
@@ -72,7 +71,10 @@ const NewPasswordForm = () => {
             navigate("/");
           }, 2000);
         } else {
-          setMessages({ message: "An error occured, please try again.", type: "negative" });
+          setMessages({
+            message: "An error occured, please try again.",
+            type: "negative",
+          });
           console.error("Error: " + error);
         }
       }

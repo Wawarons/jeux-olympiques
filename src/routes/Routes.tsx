@@ -49,7 +49,7 @@ const Routes = () => {
         },
         {
           path: "/forget_password",
-          element: <Authentication type="forget_password" title="Reset password"/>,
+          element: <Authentication type="forget_password"/>,
         },
         {
           path: "/register/reset-password",

@@ -53,6 +53,17 @@ form label {
     rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 }
 
+.form_h1 {
+  font-size: 5vw;
+  font-weight: bold;
+}
+
+@media screen and (min-width: 1200px) {
+  .form_h1 {
+     font-size: 42px;
+  }
+}
+
 .button-shadow:hover {
   box-shadow: none;
 }
@@ -96,7 +107,7 @@ button:disabled {
 }
 
 .side-menu-link {
-  box-shadow: rgba(0, 0, 0, 0.137) 0px 1px 2px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 @keyframes slide-show-menu {

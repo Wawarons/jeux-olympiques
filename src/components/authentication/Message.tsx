@@ -13,7 +13,7 @@ const Message = ({ messages, type }: Props) => {
   return (
     <>
       {Array.isArray(messages) && messages.length ? (
-        <ul className={`w-full p-2 rounded-md font-bold text-md space-y-2 ${type}`}>
+        <ul className={`w-fit p-2 rounded-md font-bold text-md space-y-2 ${type}`}>
           {messages.map((message, index) => {
             return (
               <li key={index} className="first-letter:uppercase">
