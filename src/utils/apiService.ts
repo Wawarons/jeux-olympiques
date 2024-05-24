@@ -1,18 +1,15 @@
-import axios from "axios";
-
-/**
- * Asynchronous function that checks the validity of a token by making a GET request to the API endpoint for token validation.
- * It returns a Promise that resolves to a boolean indicating whether the token is valid (status code 200) or not.
- *
- * @param {string} token - The token to be validated.
- * @returns {Promise<boolean>} A Promise that resolves to true if the token is valid, false otherwise.
- */
 export const checkTokenValidity = (token: string): Promise<boolean> => {
   return axios
-    .get(`${import.meta.env.VITE_API_URL}/token/user/validate?token=${token}`, { withCredentials: true })
-    .then(response => response.status === 200).catch(() => {
-        return false;
-    })};
+    .get(`${import.meta.env.VITE_API_URL}/token/user/validate?token=${token}`, {
+      withCredentials: true,
+    })
+    .then((response) => {
+      return response.status === 200;
+    })
+    .catch(() => {
+      return false;
+    });
+};
 
 /**
  * Checks if the access token is present in the document's cookies.

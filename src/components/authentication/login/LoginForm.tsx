@@ -29,7 +29,7 @@ type Message = {
  * @returns {JSX.Element} A form component with email and password fields for user login.
  */
 const LoginForm = ({ loginSuccessfull }: Props): JSX.Element => {
-  const [message, setMessage] = useState<Message>();
+  const [message, setMessage] = useState<Message | null>();
   const { preAuth, setToken } = useAuth();
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [validEmail, setValidEmail] = useState<boolean | null>(null);
@@ -98,8 +98,11 @@ const LoginForm = ({ loginSuccessfull }: Props): JSX.Element => {
       <form
         method="POST"
         onSubmit={handleSubmit}
-        className="p-2 my-3 space-y-5 rounded-md form-shadow
+        className="p-2 my-5 space-y-5 rounded-md form-shadow
         max-w-[500px]"
+        onChange={() => {
+          setMessage(null);
+        }}
       >
         <div className="space-y-2">
           <div className="flex items-center space-x-2">

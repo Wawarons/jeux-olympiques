@@ -30,10 +30,13 @@ const Code = () => {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
     const formData = new FormData(form);
-    const code: string = (formData.get("code") as string);
-    if(code != null) {
+    const code: string = formData.get("code") as string;
+    if (code != null) {
       if (!isValidCode(code)) {
-        setMessages({message:["Code must only contains digits."], type: "negative"});
+        setMessages({
+          message: ["Code must only contains digits."],
+          type: "negative",
+        });
         return;
       }
     }
@@ -57,7 +60,7 @@ const Code = () => {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error?.response?.data?.details?.includes("code invalid.")) {
-          setMessages({message: "code invalid.", type: "negative"});
+          setMessages({ message: "code invalid.", type: "negative" });
         }
       } else {
         console.error("An unexpected error occurred:", error);
@@ -95,7 +98,10 @@ const Code = () => {
     }
 
     if (response && response.status == 200) {
-      setMessages({message: `New code has been send to ${user.email}`, type:"positive"});
+      setMessages({
+        message: `New code has been send to ${user.email}`,
+        type: "positive",
+      });
       setTimeout(() => {
         setMessages(null);
       }, 5000);
@@ -104,41 +110,53 @@ const Code = () => {
   };
 
   return (
-    <div className="p-4 space-y-4">
-      <Message messages={messages?.message} type={messages?.type} />
+    <>
+      <div className="my-5">
+        <h1 className="form_h1">Validation code</h1>
+        <h4>
+          Please enter the validation code that has been sent to your e-mail
+          address.
+        </h4>
+      </div>
+      <div className="space-y-4">
+        <Message messages={messages?.message} type={messages?.type} />
 
-      <form method="POST" onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label>Code</label>
-          <br />
-          <input
-            className="auth_input"
-            type="text"
-            name="code"
-            maxLength={6}
-            required
-          />
-        </div>
-        <div className="flex space-x-5">
-          <input
-            className="rounded-md bg-blue-500 p-2 button-shadow cursor-pointer"
-            type="submit"
-            value="Send"
-          />
-          <button
-            className="rounded-md p-2 button-shadow cursor-pointer"
-            onClick={sendNewCode}
-            disabled={newCodeDisable}
-          >
-            {newCodeDisable ? (
-              <Timer seconds={DISABLE_TIME/1000} isStart={newCodeDisable} />
-            ) : (
-              "Send new code"
-            )}
-          </button>
-        </div>
-      </form>
-    </div>
+        <form method="POST" onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label>Code</label>
+            <br />
+            <input
+              className="auth_input"
+              type="text"
+              name="code"
+              maxLength={6}
+              onChange={() => {
+                setMessages(null);
+              }}
+              required
+            />
+          </div>
+          <div className="flex space-x-5">
+            <input
+              className="rounded-md bg-blue-500 p-2 button-shadow cursor-pointer"
+              type="submit"
+              value="Send"
+            />
+            <button
+              className="rounded-md p-2 button-shadow cursor-pointer"
+              onClick={sendNewCode}
+              disabled={newCodeDisable}
+            >
+              {newCodeDisable ? (
+                <Timer seconds={DISABLE_TIME / 1000} isStart={newCodeDisable} />
+              ) : (
+                "Send new code"
+              )}
+            </button>
+          </div>
+        </form>
+      </div>
+    </>
   );
 };
 
