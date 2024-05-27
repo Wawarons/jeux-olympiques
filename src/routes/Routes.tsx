@@ -6,6 +6,8 @@ import Page404 from "../Page404";
 import ProtectedRoutes from "./ProtectedRoutes";
 import NoAuthRoutes from "./NoAuthRoutes";
 import NewPasswordForm from "../components/authentication/NewPasswordForm";
+import Cart from "../components/Cart";
+import Tickets from "../components/Bundles";
 
 /**
  * Function that defines the routing configuration for the application.
@@ -15,6 +17,7 @@ import NewPasswordForm from "../components/authentication/NewPasswordForm";
  * @returns {JSX.Element} The RouterProvider component with the configured router.
  */
 const Routes = () => {
+
   const publicRoutes = [
     {
       path: "/",
@@ -28,13 +31,22 @@ const Routes = () => {
       path: "/logout",
       element: <Logout />,
     },
+    {
+      path: "/tickets",
+      element: <Tickets />,
+    },
   ];
 
   const authenticatedRoutes = [
     {
       path: "/",
       element: <ProtectedRoutes />,
-      children: [],
+      children: [
+        {
+          path: "/cart",
+          element: <Cart />,
+        },
+      ],
     },
   ];
 
@@ -49,11 +61,11 @@ const Routes = () => {
         },
         {
           path: "/forget_password",
-          element: <Authentication type="forget_password"/>,
+          element: <Authentication type="forget_password" />,
         },
         {
           path: "/register/reset-password",
-          element: <NewPasswordForm/>
+          element: <NewPasswordForm />,
         },
       ],
     },
