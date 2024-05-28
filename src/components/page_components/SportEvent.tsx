@@ -8,7 +8,7 @@ import { SlArrowRight } from "react-icons/sl";
  */
 const SportEvent = ({ events }: { events: string[] }) => {
   return (
-    <ul className="w-4/5 rounded-lg border-2 border-gray-200 mx-auto">
+    <ul className="w-4/5 rounded-lg border-2 border-gray-200 mx-auto mb-20">
       {events.map((epreuve: string, index: number) => {
         return (
           <li

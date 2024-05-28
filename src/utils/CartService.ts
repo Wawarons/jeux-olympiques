@@ -44,7 +44,7 @@ export interface ItemCart {
  */
 export const getBundles = async (): Promise<BundleProps[]> => {
   return axios
-    .get(`${import.meta.env.VITE_API_URL}/formulas`, {
+    .get(`${import.meta.env.VITE_API_URL}/bundles`, {
       withCredentials: true,
     })
     .then((response) => {
@@ -55,18 +55,18 @@ export const getBundles = async (): Promise<BundleProps[]> => {
 /**
  * Adds an item to the user's cart based on the provided formula ID and quantity.
  * 
- * @param formulaId - The ID of the formula to add to the cart.
+ * @param bundleId - The ID of the formula to add to the cart.
  * @param quantity - The quantity of the formula to add to the cart.
  * @returns A boolean indicating whether the addition was successful (true) or not (false).
  * @throws An error message if an unexpected error occurs during the API call.
  */
-export const addItemInCart = async (formulaId: number, quantity: number) => {
+export const addItemInCart = async (bundleId: number, quantity: number) => {
   const body = {
-    formulaId,
+    bundleId,
     quantity,
   };
   return axios
-    .post(`${import.meta.env.VITE_API_URL}/cart/formula/add_item`, body, {
+    .post(`${import.meta.env.VITE_API_URL}/cart/bundle/add_item`, body, {
       withCredentials: true,
     })
 
@@ -82,18 +82,18 @@ export const addItemInCart = async (formulaId: number, quantity: number) => {
 /**
  * Updates the quantity of an item in the user's cart based on the provided formula ID.
  * 
- * @param formulaId - The ID of the formula whose quantity needs to be updated in the cart.
+ * @param bundleId - The ID of the formula whose quantity needs to be updated in the cart.
  * @param quantity - The new quantity value to be set for the formula in the cart.
  * @returns A boolean indicating whether the update was successful (true) or not (false).
  * @throws An error message if an unexpected error occurs during the API call.
  */
-export const updateItemInCart = async (formulaId: number, quantity: number) => {
+export const updateItemInCart = async (bundleId: number, quantity: number) => {
   const body = {
-    formulaId,
+    bundleId,
     quantity,
   };
   return axios
-    .post(`${import.meta.env.VITE_API_URL}/cart/formula/update_item`, body, {
+    .post(`${import.meta.env.VITE_API_URL}/cart/bundle/update_item`, body, {
       withCredentials: true,
     })
 
@@ -111,17 +111,17 @@ export const updateItemInCart = async (formulaId: number, quantity: number) => {
 /**
  * Deletes an item from the user's cart based on the provided formula ID.
  * 
- * @param formulaId - The ID of the formula to be deleted from the cart.
+ * @param bundleId - The ID of the formula to be deleted from the cart.
  * @returns A boolean indicating whether the deletion was successful (true) or not (false).
  * @throws An error message if an unexpected error occurs during the API call.
  */
-export const deleteItemInCart = async (formulaId: number) => {
+export const deleteItemInCart = async (bundleId: number) => {
   const body = {
-    formulaId,
+    bundleId,
     quantity: -1,
   };
   return axios
-    .post(`${import.meta.env.VITE_API_URL}/cart/formula/update_item`, body, {
+    .post(`${import.meta.env.VITE_API_URL}/cart/bundle/update_item`, body, {
       withCredentials: true,
     })
 
@@ -144,7 +144,7 @@ export const deleteItemInCart = async (formulaId: number) => {
  */
 export const getCartUser = async (): Promise<ItemCart[]> => {
   return axios
-    .get(`${import.meta.env.VITE_API_URL}/cart/formula/items`, {
+    .get(`${import.meta.env.VITE_API_URL}/cart/bundle/items`, {
       withCredentials: true,
     })
     .then((response) => {

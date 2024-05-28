@@ -10,6 +10,7 @@ import { TiDelete } from "react-icons/ti";
 
 interface ItemCartProps {
   items: ItemCart[] | [];
+  reload: (isReaload: boolean) => void
 }
 
 /**
@@ -19,21 +20,25 @@ interface ItemCartProps {
  *
  * @returns {JSX.Element} JSX element representing the cart table with item details and delete functionality.
  */
-const ItemCartTable = ({ items }: ItemCartProps) => {
-  const [itemsList, setItemsList] = useState<ItemCart[]>([]);
+const ItemCartTable = ({ items, reload }: ItemCartProps) => {
+  const [itemsList, setItemsList] = useState<ItemCart[]>(items);
   const [total, setTotal] = useState<number>(0);
 
   useEffect(() => {
     let totalItems = 0;
     itemsList.forEach((item) => (totalItems += item.price));
-    setItemsList(items);
     setTotal(totalItems);
   }, [items, itemsList]);
 
   const handleDeleteItem = async (itemId: number) => {
     const isDelete = await deleteItemInCart(itemId);
     if (isDelete) getCartUser().then((data) => setItemsList(data));
+    reload(true);
   };
+
+  const handleReload = (state: boolean) => {
+    reload(state);
+  }
 
   return (
     <div className="flex flex-col md:flex-row space-y-2 rounded-lg text-blue-500 cart-shadow overflow-hidden">
@@ -52,14 +57,14 @@ const ItemCartTable = ({ items }: ItemCartProps) => {
                 <TiDelete />
               </div>
               <div className="p-4 w-full">
-                <ItemCartCard item={item} />
+                <ItemCartCard item={item} reaload={handleReload} />
               </div>
             </div>
           );
         })}
       </div>
-      <div className="md:w-2/5 md:border-l-2 border-blue-300">
-        <p className="font-bold text-blue-500 mx-2 text-center text-lg">
+      <div className="md:w-2/5 md:border-l-2 max-md:border-t-2  border-blue-300 ">
+        <p className="font-bold text-blue-500 mx-2 text-center text-lg max-md:mt-4">
           Order summary
         </p>
 

@@ -4,6 +4,7 @@ import { IoCheckmark } from "react-icons/io5";
 
 export interface ItemCartProps {
   item: ItemCart;
+  reload: (state: boolean) => void
 }
 
 /**
@@ -12,14 +13,15 @@ export interface ItemCartProps {
  * @param {ItemCartProps} item - The item object containing details like id, title, quantity, and price.
  * @returns {JSX.Element} - Returns the JSX element for the item card with title, quantity input, price, and update button.
  */
-const ItemCartCard = ({ item }: ItemCartProps) => {
+const ItemCartCard = ({ item, reload }: ItemCartProps) => {
   const [quantity, setQuantity] = useState(item.quantity);
 
   const handleStateQuantity = async (event: FormEvent) => {
     event.preventDefault();
     const isUpdate = await updateItemInCart(item.id, quantity);
-    console.log(isUpdate);
-    if (isUpdate) history.go(0);
+    if (isUpdate) {
+      reload(true)
+    }
   };
 
   return (
