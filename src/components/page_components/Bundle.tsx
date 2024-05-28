@@ -41,7 +41,7 @@ const Bundle = ({
   const handleAddInCart = (event: FormEvent) => {
     event.preventDefault();
     if (user.isAuth && user.id) {
-        addItemInCart(id, quantity);
+        addItemInCart(id, 1);
         setAddedtoCart(true);
         setTimeout(() => {
           setAddedtoCart(false);
@@ -61,7 +61,7 @@ const Bundle = ({
         className="border-2 p-4 w-[350px] h-full rounded-lg bg-blue-400 space-y-4 shadow-xl transition duration-300  text-white cursor-pointer"
       >
         <div className="flex items-center w-full justify-between space-x-4">
-          <h3 className="text-3xl text-white font-bold">{title}</h3>
+          <h3 className="text-3xl text-white font-bold">{title} <span className="font-light text-lg">x{quantity}</span></h3>
           <h3 className="text-2xl rounded-full p-1 shadow-inner">{price} €</h3>
         </div>
         <p className="text-md">{description}</p>
