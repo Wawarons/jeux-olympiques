@@ -19,7 +19,7 @@ const SideMenu = () => {
     },
     {
       title: "Buy tickets",
-      href: "#",
+      href: "/tickets",
     },
     {
       title: "Events",
@@ -27,7 +27,7 @@ const SideMenu = () => {
     },
     {
       title: "Cart",
-      href: "#",
+      href: "/cart",
     },
   ];
 

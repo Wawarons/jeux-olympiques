@@ -105,8 +105,13 @@ const AuthProvider = ({ children }: Props) => {
    * decodes the token to extract user information, and updates the user state with the decoded information.
    * If an error occurs during the request, it logs the error message to the console.
    */
-  const claimNewToken = useCallback(() => {
-    axios
+  const claimNewToken = useCallback(async () => {
+
+    const cookieAccess = await isAccessTokenPresent();
+
+    if(cookieAccess) {
+
+      axios
       .get(`${import.meta.env.VITE_API_URL}/token/user/claim`, {
         withCredentials: true,
       })
@@ -127,13 +132,17 @@ const AuthProvider = ({ children }: Props) => {
       .catch((error) => {
         console.error("Error: " + error);
       });
+
+    }
+
+    
   }, []);
 
   useEffect(() => {
     let token = localStorage.getItem("token");
     if (token) token = JSON.parse(token).value;
     if (token) {
-      checkTokenValidity(token).then((isValid) => {
+      checkTokenValidity(token).then(async (isValid) => {
         if (isValid) {
           const decodedToken: { sub: string; roles: string[] } =
             jwtDecode(token);
@@ -145,12 +154,14 @@ const AuthProvider = ({ children }: Props) => {
           localUser(user);
         } else {
           localStorage.removeItem("token");
-          if (isAccessTokenPresent()) claimNewToken();
+          localStorage.removeItem("auth");
+          claimNewToken();
         }
       });
     } else {
       localStorage.removeItem("token");
-      if (isAccessTokenPresent()) claimNewToken();
+      localStorage.removeItem("auth");
+      claimNewToken();
     }
   }, [claimNewToken]);
 
@@ -170,6 +181,7 @@ const AuthProvider = ({ children }: Props) => {
    */
   const login = (userData: Partial<User>) => {
     _setToken(null);
+    localStorage.setItem("auth", "isAuth");
     dispatch({ type: "LOGIN", payload: userData });
   };
 

@@ -15,36 +15,47 @@ const Footer = () => {
   const sizeIcon = 20;
 
   return (
-    <div className="p-4 mt-10 h-36 bg-slate-400 text-xs md:text-md flex flex-col justify-between">
-      <div className=" flex justify-between space-x-2">
-        <div className="w-fit flex flex-col space-y-2 h-fit justify-around">
-          <p className="w-fit font-bold">Suivez nous sur nos réseaux:</p>
-          <div className="flex space-x-4">
-            <FaInstagram size={sizeIcon} />
-            <FaFacebook size={sizeIcon} />
-            <FaTwitter size={sizeIcon} />
-            <FaTiktok size={sizeIcon} />
-            <FaYoutube size={sizeIcon} />
-          </div>
+    <div className="space-y-6 bg-blue-500 text-white">
+      <div className="flex justify-evenly">
+        <div className="text-center">
+          <p className="text-lg font-bold my-2">Contact</p>
+          <ul className="">
+            <li className="text-sm">Email: <a href="mailto:contact@jo2024.com">contact@jo2024.com</a></li>
+            <li className="text-sm">Télélihone: 03.21.19.15.12</li>
+            <li className="text-sm">
+              Adresse: 25 Rue Argenteuil, Paris 73000, France
+            </li>
+          </ul>
         </div>
-
-        <div className="w-fit flex flex-col space-y-2 h-fit">
-          <p className="w-fit font-bold">Contactez nous:</p>
-          <div className="flex flex-col align-middle">
-            <p>Email: contact@jo2024.com</p>
-            <p>Téléphone: 03.21.19.15.12</p>
-            <p>Adresse: 25 Rue Argenteuil, Paris 73000, France</p>
+        <div className="text-center">
+          <p className="text-lg font-bold my-2">Socials</p>
+          <div className="flex space-x-4">
+            <a href="https://www.instagram.com">
+              <FaInstagram size={sizeIcon} />
+            </a>
+            <a href="https://www.instagram.com">
+              <FaFacebook size={sizeIcon} />
+            </a>
+            <a href="https://www.x.com">
+              <FaTwitter size={sizeIcon} />
+            </a>
+            <a href="https://www.tiktok.com">
+              <FaTiktok size={sizeIcon} />
+            </a>
+            <a href="https://www.youtube.com">
+              <FaYoutube size={sizeIcon} />
+            </a>
           </div>
         </div>
       </div>
-      <div className="flex justify-between">
-        <div className="text-md flex w-fit space-x-2">
-          <p>FAQ</p>
-          <p>Mentions Légales</p>
-          <p>Politique de confidentialité</p>
-          <p>Conditions générales</p>
-        </div>
-        <p>©Jeux Olympiques Paris {new Date().getFullYear()}</p>
+      <div className="text-md flex justify-between w-full px-2">
+        <p className="text-sm">FAQ</p>
+        <p className="text-sm">Mentions Légales</p>
+        <p className="text-sm">Politique de confidentialité</p>
+        <p className="text-sm">Conditions générales</p>
+        <p className="text-sm">
+          © Jeux Olympiques Paris {new Date().getFullYear()}
+        </p>
       </div>
     </div>
   );

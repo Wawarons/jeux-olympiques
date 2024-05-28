@@ -1,9 +1,10 @@
-import HomePresentation from "./components/HomePresentation";
 import NavBar from "./components/NavBar";
 import Description from "./components/page_components/Phone";
 import Article from "./components/page_components/Article";
 import Footer from "./components/page_components/Footer";
 import SportEvent from "./components/page_components/SportEvent";
+import parisLogo2024 from "./assets/pics/home_presentation.png";
+import Presentation from "./components/Presentation";
 
 /**
  * Function component representing the Home page of the application.
@@ -63,12 +64,12 @@ const Home = () => {
   return (
     <>
       <NavBar />
-      <HomePresentation />
+      <Presentation imgSrc={parisLogo2024} title={"Jeux Olympiques de Paris 2024"} description={"Bienvenue sur le site officiel des Jeux Olympiques de 2024 à Paris ! Explorez les compétitions, préparez votre séjour et restez informé des dernières actualités. Rejoignez-nous pour célébrer l'excellence sportive et l'esprit olympique à Paris en 2024 !"} />
       <div className="flex flex-col md:flex-row w-[95%] mx-auto p-4 space-x-10 h-1/6 ">
         <Description />
 
-        <div className="flex flex-col w-3/4">
-          <h2 className="text-6xl font-bold my-10 w-fit max-sm:mx-auto">
+        <div className="flex flex-col w-3/4 items-center">
+          <h2 className="section-title max-sm:mx-auto">
             Articles
           </h2>
 
