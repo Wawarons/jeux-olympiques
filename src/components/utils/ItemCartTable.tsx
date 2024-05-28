@@ -57,7 +57,7 @@ const ItemCartTable = ({ items, reload }: ItemCartProps) => {
                 <TiDelete />
               </div>
               <div className="p-4 w-full">
-                <ItemCartCard item={item} reaload={handleReload} />
+                <ItemCartCard item={item} reload={handleReload} />
               </div>
             </div>
           );
