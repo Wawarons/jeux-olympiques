@@ -32,7 +32,7 @@ const SideMenu = () => {
   ];
 
   return (
-    <div className="drop-shadow-2xl md:rounded-md md:w-1/3 lg:w-1/4 xl:w-1/5 fixed right-0 w-screen z-10 md:h-[70vh] h-full bg-bg-color text-text-color flex flex-col align-middle items-center">
+    <div className="drop-shadow-2xl md:rounded-md md:w-1/3 lg:w-1/4 xl:w-1/5 fixed right-0 w-screen z-10 md:h-[70vh] h-full bg-bg-color text-text-color flex flex-col align-middle items-center overflow-y-scroll">
       <img
         src="https://i.ibb.co/xqfV6YN/paris-rings-jo.jpg"
         alt="paris-rings-jo"
@@ -42,7 +42,7 @@ const SideMenu = () => {
         linksList={links}
         classLink="p-4 mx-auto hover:text-blue-400 text-xl text-center side-menu-link w-full"
       />
-
+      {user.roles.includes("ADMIN") && <a href="/admin/dashboard" className="p-4 mx-auto hover:text-blue-400 text-xl text-center side-menu-link w-full">Control panel</a>}
       {user.isAuth ? (
         <>
           <a href="#" className="p-4 mx-auto hover:text-blue-400 text-xl text-center side-menu-link w-full">

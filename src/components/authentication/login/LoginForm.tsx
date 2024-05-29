@@ -2,10 +2,10 @@ import { FormEvent, useState } from "react";
 import { useAuth } from "../../../providers/AuthProvider";
 import { FaArrowRight, FaCheckCircle } from "react-icons/fa";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
 import HideShowPassword from "../../utils/HideShowPassword";
 import Message from "../Message";
 import { isValidEmail, isValidPassword } from "../../../utils/ValidData";
+import { getDataToken } from "../../../utils/authService";
 
 type FormData = {
   email: string;
@@ -71,10 +71,8 @@ const LoginForm = ({ loginSuccessfull }: Props): JSX.Element => {
 
       if (response.status === 200 && response.data) {
         const { token } = response.data;
-
-        const decodedToken = jwtDecode(token);
-
-        const user = { id: decodedToken.sub, email: formData.email };
+        const {sub, roles} = getDataToken(token);
+        const user = { id: sub, email: formData.email, roles };
         preAuth(user);
         setToken(token);
 

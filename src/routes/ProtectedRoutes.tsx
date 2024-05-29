@@ -1,4 +1,6 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { getDataToken } from "../utils/authService";
 
 /**
  * Function component that handles rendering protected routes based on user authentication status.
@@ -7,9 +9,28 @@ import { Navigate, Outlet } from "react-router-dom";
  * If the user is authenticated, it renders the child routes using the Outlet component.
  */
 const ProtectedRoutes = () => {
-  const isAuth = localStorage.getItem("auth");
+  const navigate = useNavigate();
 
-  if (!(isAuth && isAuth === "isAuth")) return <Navigate to="/register" />;
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const isAuth = localStorage.getItem("auth");
+
+    if (token && isAuth === "isAuth") {
+      try {
+        const {sub, roles} = getDataToken(token);
+        if (sub && roles.length) {
+         
+          if (!roles.includes("USER")) navigate("/register");
+        } else {
+          navigate("/");
+        }
+      } catch (error) {
+        console.error("An error occured");
+      }
+    } else {
+      navigate("/register");
+    }
+  }, [navigate]);
 
   return <Outlet />;
 };

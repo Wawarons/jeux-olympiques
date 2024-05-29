@@ -1,5 +1,4 @@
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
 import {
   createContext,
   useCallback,
@@ -11,11 +10,12 @@ import {
   Reducer,
 } from "react";
 import { checkTokenValidity, isAccessTokenPresent } from "../utils/apiService";
+import { getDataToken } from "../utils/authService";
 
 /**
  * Represents the interface definition for a User object, including authentication status, id, email, and roles.
  */
-interface User {
+export interface User {
   isAuth: boolean;
   id: string | null;
   email: string;
@@ -106,36 +106,30 @@ const AuthProvider = ({ children }: Props) => {
    * If an error occurs during the request, it logs the error message to the console.
    */
   const claimNewToken = useCallback(async () => {
-
     const cookieAccess = await isAccessTokenPresent();
 
-    if(cookieAccess) {
-
+    if (cookieAccess) {
       axios
-      .get(`${import.meta.env.VITE_API_URL}/token/user/claim`, {
-        withCredentials: true,
-      })
-      .then((response) => {
-        if (response && response.status === 200 && response.data) {
-          const token = response.data.token;
-          localStorage.setItem("token", JSON.stringify({ value: token }));
-          const decodedToken: { sub: string; roles: string[] } =
-            jwtDecode(token);
-          const user = {
-            isAuth: true,
-            id: decodedToken.sub || "",
-            roles: decodedToken.roles,
-          };
-          localUser(user);
-        }
-      })
-      .catch((error) => {
-        console.error("Error: " + error);
-      });
-
+        .get(`${import.meta.env.VITE_API_URL}/token/user/claim`, {
+          withCredentials: true,
+        })
+        .then((response) => {
+          if (response && response.status === 200 && response.data) {
+            const token = response.data.token;
+            localStorage.setItem("token", JSON.stringify({ value: token }));
+            const {sub, roles} = getDataToken(token);
+            const user = {
+              isAuth: true,
+              id:sub,
+              roles
+            };
+            localUser(user);
+          }
+        })
+        .catch((error) => {
+          console.error("Error: " + error);
+        });
     }
-
-    
   }, []);
 
   useEffect(() => {
@@ -144,12 +138,11 @@ const AuthProvider = ({ children }: Props) => {
     if (token) {
       checkTokenValidity(token).then(async (isValid) => {
         if (isValid) {
-          const decodedToken: { sub: string; roles: string[] } =
-            jwtDecode(token);
+          const {sub, roles} = getDataToken(token);
           const user = {
             isAuth: true,
-            id: decodedToken.sub || "",
-            roles: decodedToken.roles,
+            id:sub,
+            roles
           };
           localUser(user);
         } else {
