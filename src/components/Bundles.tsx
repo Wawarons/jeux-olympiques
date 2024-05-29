@@ -21,7 +21,7 @@ const Bundles = () => {
 
   useEffect(() => {
     getBundlesData();
-  }, [getBundlesData]);
+  }, []);
 
   return (
     <>
@@ -38,7 +38,7 @@ const Bundles = () => {
           any risk of fraud. Paris 2024 does not issue paper tickets, and the
           ticketing is entirely digital. Fully enjoy this unique experience!
         </p>
-        <div className="space-y-4 flex flex-col md:flex-row justify-around items-center">
+        <div className="space-y-4 lg:space-x-5 flex flex-col md:flex-row flex-wrap justify-around items-center">
           {formulasData?.map((formula, index) => {
             return (
               <Bundle

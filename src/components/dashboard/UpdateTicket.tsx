@@ -152,7 +152,7 @@ const UpdateTicket = ({ isCancel, reload, id }: UpdateTicketProps) => {
           max={25}
           required
         />
-        <label htmlFor="description">
+        <label htmlFor="description" className="h-fit">
           Description{" "}
           <span className="text-xs opacity-45">10-225 characters</span>
         </label>
@@ -163,6 +163,8 @@ const UpdateTicket = ({ isCancel, reload, id }: UpdateTicketProps) => {
           defaultValue={ticket?.description}
           minLength={10}
           maxLength={250}
+          rows={4}
+          cols={70}
           required
         ></textarea>
         <label htmlFor="price">Price</label>

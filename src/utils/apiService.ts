@@ -193,3 +193,140 @@ export const getTickets = async (): Promise<TicketResponse[]> => {
 
   return ticketList;
 };
+
+export interface Bundle {
+  title: string;
+  description: string;
+  quantity: number;
+  ticketId: number;
+  discount: number;
+}
+
+export interface BundleResponse {
+  id: number;
+  title: string;
+  description: string;
+  quantity: number;
+  ticket: TicketResponse;
+  discount: number;
+  createdAt: string;
+}
+
+/**
+ * Retrieves a list of bundles from the API.
+ *
+ * @returns {Promise<BundleResponse[]>} A promise that resolves to an array of TicketResponse objects representing the bundles.
+ */
+export const getBundles = async (): Promise<BundleResponse[]> => {
+  const bundleList: BundleResponse[] = await axios
+    .get(`${import.meta.env.VITE_API_URL}/bundles`, { withCredentials: true })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("An error occured", error);
+    });
+
+  return bundleList;
+};
+
+/**
+ * Creates a new bundle by sending a POST request to the API endpoint.
+ * 
+ * @param bundle - The bundle object containing title, description, quantity, ticketId, and discount.
+ * @returns A Promise that resolves to a boolean indicating the success of the operation.
+ */
+export const createBundle = (bundle: Bundle): Promise<boolean> => {
+  const { title, description, quantity, ticketId, discount } = bundle;
+  const body = {
+    title,
+    description,
+    quantity,
+    ticketId,
+    discount,
+  };
+
+  return axios
+    .post(`${import.meta.env.VITE_API_URL}/admin/create/bundle`, body, {
+      withCredentials: true,
+    })
+    .then((response) => {
+      return response.status === 200;
+    })
+    .catch(() => {
+      return false;
+    });
+};
+
+/**
+ * Retrieves a bundle by its ID from the API.
+ * 
+ * @param bundleId - The ID of the bundle to retrieve.
+ * @returns A Promise that resolves to a BundleResponse object representing the retrieved bundle.
+ * @throws Error if an error occurs during the API request.
+ */
+export const getBundleById = async (
+  bundleId: number
+): Promise<BundleResponse> => {
+  const ticket: BundleResponse = await axios
+    .get(`${import.meta.env.VITE_API_URL}/bundle/${bundleId}`, {
+      withCredentials: true,
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("An error occured", error);
+    });
+
+  return ticket;
+};
+
+/**
+ * Updates a bundle with the provided ID using the given bundle data.
+ * 
+ * @param id - The ID of the bundle to update.
+ * @param bundle - The bundle object containing the updated information.
+ * @returns A Promise that resolves to a boolean indicating the success of the update operation.
+ */
+export const updateBundle = (id: number, bundle: Bundle): Promise<boolean> => {
+  const { title, description, quantity, discount, ticketId } = bundle;
+  const body = {
+    title,
+    description,
+    discount,
+    quantity,
+    ticketId,
+  };
+
+  return axios
+    .put(`${import.meta.env.VITE_API_URL}/admin/bundle/${id}/update`, body, {
+      withCredentials: true,
+    })
+    .then((response) => {
+      return response.status === 200;
+    })
+    .catch(() => {
+      return false;
+    });
+};
+
+/**
+ * Deletes a bundle with the specified ID by sending a DELETE request to the server.
+ *
+ * @param id - The ID of the bundle to delete.
+ * @returns A Promise that resolves to a boolean indicating if the deletion was successful (true) or not (false).
+ */
+export const deleteBundle = (id: number): Promise<boolean> => {
+  return axios
+    .delete(`${import.meta.env.VITE_API_URL}/admin/bundle/${id}/delete`, {
+      withCredentials: true,
+    })
+    .then((response) => {
+      return response.status === 200;
+    })
+    .catch((error) => {
+      console.log(error);
+      return false;
+    });
+};

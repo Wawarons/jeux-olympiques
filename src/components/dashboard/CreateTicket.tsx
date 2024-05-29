@@ -38,8 +38,8 @@ const CreateTicket = ({ reload }: CreateTicketProps) => {
     const ticket: Ticket = {
       title: title.value,
       description: description.value,
-      price: parseInt(price.value),
-      quantity: parseFloat(quantity.value),
+      price: parseFloat(price.value),
+      quantity: parseInt(quantity.value),
       isAvailable: isChecked,
       startDate: start_date.value,
       endDate: end_date.value,

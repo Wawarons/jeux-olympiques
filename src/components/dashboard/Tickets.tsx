@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { TicketResponse, getTickets } from "./utils/apiService";
-import CreateTicket from "./components/page_components/CreateTicket";
+import { TicketResponse, getTickets } from "../../utils/apiService";
+import CreateTicket from "./CreateTicket";
 import { FaCheckCircle } from "react-icons/fa";
 import { FaCircleXmark } from "react-icons/fa6";
-import UpdateTicket from "./components/page_components/UpdateTicket";
+import UpdateTicket from "./UpdateTicket";
 import { TbTicketOff } from "react-icons/tb";
 
 /**
