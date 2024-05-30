@@ -15,15 +15,11 @@ const SideMenu = () => {
   const links: linksListType[] = [
     {
       title: "Home",
-      href: "#",
+      href: "/",
     },
     {
-      title: "Buy tickets",
+      title: "Tickets",
       href: "/tickets",
-    },
-    {
-      title: "Events",
-      href: "#",
     },
     {
       title: "Cart",

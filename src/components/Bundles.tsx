@@ -21,17 +21,17 @@ const Bundles = () => {
 
   useEffect(() => {
     getBundlesData();
-  }, []);
+  }, [getBundlesData]);
 
   return (
-    <>
+    <div className="flex flex-col justify-between">
       <NavBar />
       <Presentation
         title={"Bundles"}
         description={"Buy your tickets and come see an intenational event !"}
         imgSrc={ticketBackground}
       />
-      <div className="w-5/6 mx-auto h-screen">
+      <div className="w-5/6 mx-auto mb-10 md:h-screen">
         <h2 className="md:mx-auto section-title">Bundles</h2>
         <p className="mb-5 opacity-75">
           Don't forget to buy your tickets only from official channels to avoid
@@ -55,7 +55,7 @@ const Bundles = () => {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

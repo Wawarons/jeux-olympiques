@@ -211,12 +211,12 @@ export interface BundleResponse {
   discount: number;
   createdAt: string;
 }
-
 /**
  * Retrieves a list of bundles from the API.
  *
  * @returns {Promise<BundleResponse[]>} A promise that resolves to an array of TicketResponse objects representing the bundles.
  */
+
 export const getBundles = async (): Promise<BundleResponse[]> => {
   const bundleList: BundleResponse[] = await axios
     .get(`${import.meta.env.VITE_API_URL}/bundles`, { withCredentials: true })
@@ -232,7 +232,7 @@ export const getBundles = async (): Promise<BundleResponse[]> => {
 
 /**
  * Creates a new bundle by sending a POST request to the API endpoint.
- * 
+ *
  * @param bundle - The bundle object containing title, description, quantity, ticketId, and discount.
  * @returns A Promise that resolves to a boolean indicating the success of the operation.
  */
@@ -260,7 +260,7 @@ export const createBundle = (bundle: Bundle): Promise<boolean> => {
 
 /**
  * Retrieves a bundle by its ID from the API.
- * 
+ *
  * @param bundleId - The ID of the bundle to retrieve.
  * @returns A Promise that resolves to a BundleResponse object representing the retrieved bundle.
  * @throws Error if an error occurs during the API request.
@@ -284,7 +284,7 @@ export const getBundleById = async (
 
 /**
  * Updates a bundle with the provided ID using the given bundle data.
- * 
+ *
  * @param id - The ID of the bundle to update.
  * @param bundle - The bundle object containing the updated information.
  * @returns A Promise that resolves to a boolean indicating the success of the update operation.
@@ -328,5 +328,27 @@ export const deleteBundle = (id: number): Promise<boolean> => {
     .catch((error) => {
       console.log(error);
       return false;
+    });
+};
+
+export interface InvoiceItem {
+  id?: number;
+  itemName: string;
+  quantity: number;
+}
+
+/**
+ * Retrieves a list of sales from the API.
+ *
+ * @returns {Promise<BundleResponse[]>} A promise that resolves to an array of TicketResponse objects representing the bundles.
+ */
+export const getAllInvoiceItems = (): Promise<InvoiceItem[]> => {
+  return axios
+    .get(`${import.meta.env.VITE_API_URL}/invoice_item/items`, {
+      withCredentials: true,
+    })
+    .then((response) => response.data)
+    .catch((error) => {
+      console.log(error);
     });
 };
