@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { InvoiceItem, getAllInvoiceItems } from "../../utils/apiService";
-import 'chart.js/auto';
 
 const Command = () => {
     const [invoiceItems, setInvoiceItems] = useState<InvoiceItem[]>([]);
