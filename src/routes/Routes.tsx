@@ -78,7 +78,7 @@ const Routes = () => {
           element: <Authentication type="forget_password" />,
         },
         {
-          path: "/register/reset-password",
+          path: "/reset-password",
           element: <NewPasswordForm />,
         },
       ],
