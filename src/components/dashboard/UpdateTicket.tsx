@@ -214,7 +214,8 @@ const UpdateTicket = ({ isCancel, reload, id }: UpdateTicketProps) => {
             name="is_available"
             id="is_available"
             checked={isChecked}
-            onChange={() => setIsChecked(!isChecked)}
+            onChange={() => {}}
+            onClick={() => setIsChecked(!isChecked)}
           />
         </div>
         <div className="flex justify-between w-full pt-3">

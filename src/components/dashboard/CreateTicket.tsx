@@ -143,6 +143,7 @@ const CreateTicket = ({ reload }: CreateTicketProps) => {
             name="is_available"
             id="is_available"
             checked={isChecked}
+            onChange={() => {}}
             onClick={() => setIsChecked(!isChecked)}
           />
         </div>

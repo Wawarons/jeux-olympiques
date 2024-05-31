@@ -352,3 +352,80 @@ export const getAllInvoiceItems = (): Promise<InvoiceItem[]> => {
       console.log(error);
     });
 };
+
+export interface UserBasic {
+  id: number;
+  name: string;
+  firstname: string;
+  isBlock: boolean;
+  isVerified: boolean;
+}
+
+export interface UserFullInfo {
+  id: number;
+  name: string;
+  firstname: string;
+  email: string;
+  isBlock: boolean;
+  isVerified: boolean;
+  customerKey: string;
+}
+
+/**
+ * Retrieves a list of users from the API.
+ *
+ * This function makes a GET request to the server to fetch a list of users.
+ *
+ * @returns {Promise<UserBasic[]>} A promise that resolves to an array of UserBasic objects representing the users.
+ * @throws Error if an error occurs during the API request.
+ */
+export const getUsers = () => {
+  return axios
+    .get(`${import.meta.env.VITE_API_URL}/admin/users`, {
+      withCredentials: true,
+    })
+    .then((response) => response.data)
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+/**
+ * Retrieves user information by making a GET request to the server.
+ *
+ * @param userId - The ID of the user to retrieve information for.
+ * @returns A Promise that resolves to the user data.
+ * @throws Error if an error occurs during the API request.
+ */
+export const getUser = (userId: number) => {
+  return axios
+    .get(`${import.meta.env.VITE_API_URL}/admin/user/${userId}`, {
+      withCredentials: true,
+    })
+    .then((response) => response.data)
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+/**
+ * Initiates the payment process by sending a POST request to the payment endpoint.
+ *
+ * @returns {Promise<boolean>} A promise that resolves to true if the payment process was successful, otherwise false.
+ */
+export const proceedPayement = () => {
+  return axios
+    .post(
+      `${import.meta.env.VITE_API_URL}/paiement/proceed`,
+      {},
+      {
+        withCredentials: true,
+      }
+    )
+    .then((response) => {
+      return response.data === 200;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
