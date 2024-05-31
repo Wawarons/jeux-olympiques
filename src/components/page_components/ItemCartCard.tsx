@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { ItemCart, updateItemInCart } from "../../utils/CartService";
 import { IoCheckmark } from "react-icons/io5";
 
@@ -16,12 +16,15 @@ export interface ItemCartProps {
 const ItemCartCard = ({ item, reload }: ItemCartProps) => {
   const [quantity, setQuantity] = useState(item.quantity);
 
+  useEffect(() => {
+
+  }, [reload])
+
   const handleStateQuantity = async (event: FormEvent) => {
     event.preventDefault();
     const isUpdate = await updateItemInCart(item.id, quantity);
-    if (isUpdate) {
-      reload(true)
-    }
+    if (isUpdate)
+      reload(true);
   };
 
   return (
@@ -46,7 +49,7 @@ const ItemCartCard = ({ item, reload }: ItemCartProps) => {
             </button>
           </form>
         </div>
-        <p>{item.price} €</p>
+        <p>{item.price * item.quantity} €</p>
       </div>
 
       <p>x{quantity}</p>

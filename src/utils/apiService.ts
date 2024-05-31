@@ -423,7 +423,7 @@ export const proceedPayement = () => {
       }
     )
     .then((response) => {
-      return response.data === 200;
+      return response.status === 200;
     })
     .catch((error) => {
       console.log(error);

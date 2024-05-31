@@ -39,7 +39,7 @@ export interface ItemCart {
 
 /**
  * Fetches a list of formulas from the API.
- * 
+ *
  * @returns A promise that resolves to an array of BundleProps objects representing the formulas.
  */
 export const getBundles = async (): Promise<BundleProps[]> => {
@@ -54,7 +54,7 @@ export const getBundles = async (): Promise<BundleProps[]> => {
 
 /**
  * Adds an item to the user's cart based on the provided formula ID and quantity.
- * 
+ *
  * @param bundleId - The ID of the formula to add to the cart.
  * @param quantity - The quantity of the formula to add to the cart.
  * @returns A boolean indicating whether the addition was successful (true) or not (false).
@@ -81,7 +81,7 @@ export const addItemInCart = async (bundleId: number, quantity: number) => {
 
 /**
  * Updates the quantity of an item in the user's cart based on the provided formula ID.
- * 
+ *
  * @param bundleId - The ID of the formula whose quantity needs to be updated in the cart.
  * @param quantity - The new quantity value to be set for the formula in the cart.
  * @returns A boolean indicating whether the update was successful (true) or not (false).
@@ -98,9 +98,7 @@ export const updateItemInCart = async (bundleId: number, quantity: number) => {
     })
 
     .then((response) => {
-      if (response.status === 200) {
-        return true;
-      }
+      return response.status === 200;
     })
     .catch((error) => {
       console.error("An unexpected error occured: ", error);
@@ -110,7 +108,7 @@ export const updateItemInCart = async (bundleId: number, quantity: number) => {
 
 /**
  * Deletes an item from the user's cart based on the provided formula ID.
- * 
+ *
  * @param bundleId - The ID of the formula to be deleted from the cart.
  * @returns A boolean indicating whether the deletion was successful (true) or not (false).
  * @throws An error message if an unexpected error occurs during the API call.
@@ -138,7 +136,7 @@ export const deleteItemInCart = async (bundleId: number) => {
 
 /**
  * Retrieves the user's cart items from the API.
- * 
+ *
  * @returns A promise that resolves to an array of ItemCart objects representing the user's cart items.
  * @throws An error message if an unexpected error occurs during the API call.
  */
@@ -149,7 +147,8 @@ export const getCartUser = async (): Promise<ItemCart[]> => {
     })
     .then((response) => {
       return response.data;
-    }).catch((error) => {
+    })
+    .catch((error) => {
       console.error("An unexpected error occured: ", error);
     });
 };
