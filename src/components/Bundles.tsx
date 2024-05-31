@@ -24,21 +24,21 @@ const Bundles = () => {
   }, [getBundlesData]);
 
   return (
-    <>
+    <div className="flex flex-col justify-between">
       <NavBar />
       <Presentation
         title={"Bundles"}
         description={"Buy your tickets and come see an intenational event !"}
         imgSrc={ticketBackground}
       />
-      <div className="w-5/6 mx-auto h-screen">
+      <div className="w-5/6 mx-auto mb-10 md:h-screen">
         <h2 className="md:mx-auto section-title">Bundles</h2>
         <p className="mb-5 opacity-75">
           Don't forget to buy your tickets only from official channels to avoid
           any risk of fraud. Paris 2024 does not issue paper tickets, and the
           ticketing is entirely digital. Fully enjoy this unique experience!
         </p>
-        <div className="space-y-4 flex flex-col md:flex-row justify-around items-center">
+        <div className="space-y-4 lg:space-x-5 flex flex-col md:flex-row flex-wrap justify-around items-center">
           {formulasData?.map((formula, index) => {
             return (
               <Bundle
@@ -55,7 +55,7 @@ const Bundles = () => {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

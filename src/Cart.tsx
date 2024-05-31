@@ -1,11 +1,11 @@
-import NavBar from "./NavBar";
+import NavBar from "./components/NavBar";
 import { useCallback, useEffect, useState } from "react";
-import { ItemCart, getCartUser } from "../utils/CartService";
-import { useAuth } from "../providers/AuthProvider";
-import ItemCartTable from "./utils/ItemCartTable";
-import Footer from "./page_components/Footer";
+import { ItemCart, getCartUser } from "./utils/CartService";
+import { useAuth } from "./providers/AuthProvider";
+import ItemCartTable from "./components/utils/ItemCartTable";
+import Footer from "./components/page_components/Footer";
 import { IoArrowBack } from "react-icons/io5";
-import NoItemMascotte from "../assets/mascottes/MASCOTTES_JO.png";
+import NoItemMascotte from "./assets/mascottes/MASCOTTES_JO.png";
 import { MdOutlineRemoveShoppingCart } from "react-icons/md";
 const Cart = () => {
   const { user } = useAuth();

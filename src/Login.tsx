@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Code from "./Code";
-import LoginFrom from "./LoginForm";
+import Code from "./components/authentication/login/Code";
+import LoginFrom from "./components/authentication/login/LoginForm";
 
 type Props = {
   handleFormType: (formType: "login" | "signup" | "code") => void;

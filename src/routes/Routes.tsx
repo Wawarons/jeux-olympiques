@@ -6,8 +6,10 @@ import Page404 from "../Page404";
 import ProtectedRoutes from "./ProtectedRoutes";
 import NoAuthRoutes from "./NoAuthRoutes";
 import NewPasswordForm from "../components/authentication/NewPasswordForm";
-import Cart from "../components/Cart";
+import Cart from "../Cart";
 import Tickets from "../components/Bundles";
+import AdminRoutes from "./AdminRoutes";
+import Dashboard from "../Dashboard";
 
 /**
  * Function that defines the routing configuration for the application.
@@ -50,6 +52,18 @@ const Routes = () => {
     },
   ];
 
+  const adminRoutes = [
+    {
+    path: "/",
+    element: <AdminRoutes />,
+    children: [
+      {
+        path: "/admin/dashboard",
+        element: <Dashboard />
+      }
+    ]}
+  ]
+
   const notAuthenticatedRoutes = [
     {
       path: "/",
@@ -75,6 +89,7 @@ const Routes = () => {
     ...publicRoutes,
     ...notAuthenticatedRoutes,
     ...authenticatedRoutes,
+    ...adminRoutes
   ]);
 
   return <RouterProvider router={router} />;

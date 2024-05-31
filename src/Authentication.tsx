@@ -1,7 +1,7 @@
-import Login from "./components/authentication/login/Login";
+import Login from "./Login";
 import { useState } from "react";
 import { IoArrowBack } from "react-icons/io5";
-import Signup from "./components/authentication/signup/Signup";
+import Signup from "./Signup";
 import ForgetPassword from "./components/authentication/login/ForgetPassword";
 import NavBar from "./components/NavBar";
 

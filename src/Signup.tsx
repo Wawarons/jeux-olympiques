@@ -1,4 +1,4 @@
-import SignupForm from "./SignupForm";
+import SignupForm from "./components/authentication/signup/SignupForm";
 
 type Props = {
   handleFormType: (formType: "login" | "signup") => void;
