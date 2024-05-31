@@ -16,17 +16,16 @@ const Phone = () => {
       </div>
       <div className="text-white p-4 space-y-10 flex flex-col mx-auto text-xs md:text-lg overflow-scroll h-3/4">
         <div className="p-2 pb-0 bg-blue-400 rounded-md drop-shadow-lg right-0 self-end">
-          <p>Que sont les jeux olympiques ?</p>
+          <p>What are the Olympic Games?</p>
           <p className="text-sm opacity-65 float-end">{`${time.getHours()}:${time.getMinutes()}`}</p>
         </div>
         <div className="p-2 pb-0 bg-blue-600 rounded-md drop-shadow-lg">
           <p>
-            Les Jeux Olympiques sont bien plus qu'un simple événement sportif.
-            Ils sont une célébration de l'excellence, de l'unité et du
-            dépassement de soi. En 2024, Paris accueillera ce rendez-vous
-            mondial emblématique, offrant une plateforme unique où les athlètes
-            du monde entier se réuniront pour rivaliser dans un esprit de
-            fair-play et de camaraderie.
+            The Olympic Games are much more than just a sporting event. They are
+            a celebration of excellence, unity, and self-improvement. In 2024,
+            Paris will host this iconic global event, providing a unique
+            platform where athletes from around the world will come together to
+            compete in a spirit of fair play and camaraderie.
           </p>
           <p className="text-md opacity-65 float-end">{`${time.getHours()}:${
             time.getMinutes() + 1
@@ -34,29 +33,28 @@ const Phone = () => {
         </div>
         <div className="p-2 pb-0 bg-blue-600 rounded-md drop-shadow-lg">
           <p>
-            Plongez dans l'univers captivant des Jeux Olympiques France 2024 en
-            explorant nos différentes sections. Découvrez le programme des
-            compétitions, les sites emblématiques, et suivez les dernières
-            actualités pour rester informé de tout ce qui se passe avant et
-            pendant les Jeux.
+            Dive into the captivating world of the 2024 Olympic Games in France
+            by exploring our different sections. Discover the competition
+            schedule, iconic venues, and follow the latest news to stay informed
+            about everything happening before and during the Games.
           </p>
           <p className="text-md opacity-65 float-end">{`${time.getHours()}:${
             time.getMinutes() + 2
           }`}</p>
         </div>
         <div className="p-2 pb-0 bg-blue-400 rounded-md drop-shadow-lg self-end">
-          <p>Pour qui sont fait les jeux olympiques ?</p>
+          <p>Who are the Olympic Games for?</p>
           <p className="text-sm opacity-65 float-end">{`${time.getHours()}:${
             time.getMinutes() + 2
           }`}</p>
         </div>
         <div className="p-2 pb-0 bg-blue-600 rounded-md drop-shadow-lg">
           <p>
-            Que vous soyez un passionné de sport, un amateur de culture ou
-            simplement curieux de vivre cette expérience historique, les Jeux
-            Olympiques France 2024 promettent d'être un moment inoubliable pour
-            tous. Rejoignez-nous dans cette aventure unique et préparez-vous à
-            vivre des émotions intenses au cœur de la compétition olympique.
+            Whether you're a sports enthusiast, a culture lover, or simply
+            curious to experience this historic event, the 2024 Olympic Games in
+            France promise to be an unforgettable moment for all. Join us on
+            this unique adventure and get ready to experience intense emotions
+            at the heart of the Olympic competition.
           </p>
           <p className="text-md opacity-65 float-end">{`${time.getHours()}:${
             time.getMinutes() + 3

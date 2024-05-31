@@ -41,9 +41,6 @@ const SideMenu = () => {
       {user.roles.includes("ADMIN") && <a href="/admin/dashboard" className="p-4 mx-auto hover:text-blue-400 text-xl text-center side-menu-link w-full">Control panel</a>}
       {user.isAuth ? (
         <>
-          <a href="#" className="p-4 mx-auto hover:text-blue-400 text-xl text-center side-menu-link w-full">
-            Settings
-          </a>
           <a
             href="#"
             onClick={() => setConfirmLogout(!confirmLogout)}
